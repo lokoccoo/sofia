@@ -134,6 +134,22 @@
             opacity: 0;
             transition: opacity 1s ease;
             padding: 20px 0; /* Margem de segurança para telas pequenas */
+            text-align: center;
+        }
+
+        .aviso-clique {
+            color: #fff;
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            animation: piscar 1.5s infinite alternate;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes piscar {
+            from { opacity: 0.6; }
+            to { opacity: 1; }
         }
 
         .envelope-real { position: relative; width: 100%; cursor: pointer; }
@@ -252,6 +268,7 @@
     </div>
 
     <div id="container-convite">
+        <div class="aviso-clique" id="avisoCliq">📜 Clique no pergaminho para desenrolar!</div>
         <div class="envelope-real" id="envelope" onclick="abrirConvite()">
             <div class="haste topo"></div>
             <div class="pergaminho">
@@ -266,7 +283,7 @@
                         <p>📅 <strong>15 de novembro de 2026</strong></p>
                         <p>📍 <strong>Local do Castelo</strong><br>(O endereço será enviado após a confirmação de presença)</p>
                     </div>
-                    <a href="https://wa.me/5544998089136" target="_blank" class="btn-rsvp">Confirmar Presença ✨</a>
+                    <a href="https://wa.me/5544991192188?text=Oiii%2C%20Passando%20para%20confirmar%20nossa%20presen%C3%A7a%20no%20anivers%C3%A1rio%20da%20Sophia!" target="_blank" class="btn-rsvp">Confirmar Presença ✨</a>
                 </div>
             </div>
             <div class="haste base"></div>
@@ -324,6 +341,12 @@
             const envelope = document.getElementById('envelope');
             if (!envelope.classList.contains('aberto')) {
                 envelope.classList.add('aberto');
+                
+                // Faz a mensagem de aviso sumir suavemente
+                const aviso = document.getElementById('avisoCliq');
+                aviso.style.opacity = '0';
+                setTimeout(() => { aviso.style.display = 'none'; }, 500);
+
                 somRecado.play().catch(e => console.log("Erro somRecado contornado."));
             }
         }
